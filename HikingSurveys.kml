@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>HikingSurveys.kml</name>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl10</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl9</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin10">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin00</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl90</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin00">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin3">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl10">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl9">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl90">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<name>HikingSurveys</name>
+		<open>1</open>
+		<Folder>
+			<name>HeavyUnderstory</name>
+			<open>1</open>
+			<Placemark>
+				<name>MountLolaLower</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.3415205255886,39.45544571388431,0 -120.3404356489998,39.47735021528522,0 -120.3454145651457,39.4767944095376,0 -120.3559073094891,39.45473251734182,0 -120.356405433748,39.44017493345338,0 -120.3454548175526,39.44209496027307,0 -120.3415205255886,39.45544571388431,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>YubaRiverBridge</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-121.3381674959973,39.22271976183875,0 -121.3431062951986,39.22184247661686,0 -121.3369622605205,39.21466916075348,0 -121.3286770357802,39.21701235807051,0 -121.3346815686603,39.22360160597555,0 -121.3381674959973,39.22271976183875,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>DonnerRidge</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.2925415854419,39.3508586894974,0 -120.2829015514401,39.33781698230365,0 -120.2726681348179,39.33607984535745,0 -120.2686299488514,39.34229109032383,0 -120.2870088327931,39.35195100376521,0 -120.2925415854419,39.3508586894974,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>ProsserHill</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.2118279815588,39.36921239873615,0 -120.2202951946322,39.38259179072033,0 -120.2330915679399,39.37904253585897,0 -120.2302724539352,39.36956780974766,0 -120.2118279815588,39.36921239873615,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>AlderHill</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.1989554368692,39.35554918756814,0 -120.1931480172459,39.34585538574412,0 -120.1809953458971,39.34921447900859,0 -120.1818870319375,39.36126758908253,0 -120.1989554368692,39.35554918756814,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>BocaHill</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.1243865111077,39.38889194266722,0 -120.1197139227404,39.37794032815775,0 -120.1037521157258,39.37967227077401,0 -120.099804966688,39.39056568108492,0 -120.1153228218069,39.40143012054427,0 -120.1243865111077,39.38889194266722,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>BocaRidge</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.077960698562,39.42903132115497,0 -120.0687573491018,39.41997882496112,0 -120.0491934563716,39.41976263287641,0 -120.0475721594242,39.42815288341083,0 -120.0575014759913,39.43684882704653,0 -120.0734380121458,39.43349243292469,0 -120.077960698562,39.42903132115497,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>FreelPeakLower</name>
+				<styleUrl>#m_ylw-pushpin10</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-119.9209172926268,38.84562993087529,0 -119.9131414592458,38.84622135657479,0 -119.9107022620983,38.85614352693672,0 -119.9106756959759,38.86285044045719,0 -119.9095873685824,38.86569099585441,0 -119.918401534327,38.87079263312069,0 -119.9231123673844,38.86979140685134,0 -119.9235897260819,38.86593570211001,0 -119.9176954907963,38.86263838861935,0 -119.9240604271391,38.85561359170705,0 -119.9236854619607,38.85017929234346,0 -119.9209172926268,38.84562993087529,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>RoundMound</name>
+				<styleUrl>#m_ylw-pushpin1</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-119.9532043712783,38.98679476252821,0 -119.9520305485581,38.98233728703558,0 -119.9487640365451,38.98151864743184,0 -119.9468069486724,38.9822033790417,0 -119.947962311772,38.98565548231331,0 -119.9501430568681,38.98758445141752,0 -119.9532043712783,38.98679476252821,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>RubiconPoint</name>
+				<styleUrl>#msn_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.093553259676,38.98201608398937,0 -120.0930177657156,38.99251169670804,0 -120.0955919293877,38.99968621089018,0 -120.1038568257051,38.99823256076308,0 -120.1024922210301,38.98808063055487,0 -120.1024826908469,38.9789820540788,0 -120.093553259676,38.98201608398937,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+		<Folder>
+			<name>LightUnderstory</name>
+			<open>1</open>
+			<Placemark>
+				<name>OregonPeak</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-121.1864933573292,39.40425783644383,0 -121.190415760352,39.39968922887814,0 -121.1842653390422,39.3892751342841,0 -121.1757051187163,39.38786133226791,0 -121.1777517277987,39.39701581491508,0 -121.1833763302318,39.40164040254861,0 -121.1864933573292,39.40425783644383,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>BearHeadwaters</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.6800729897595,39.30697051402893,0 -120.6774590021162,39.30277509099411,0 -120.6681789473787,39.3027327690917,0 -120.6649561582853,39.30685810449672,0 -120.6752469671358,39.30795680466827,0 -120.6800729897595,39.30697051402893,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>MountLolaUpper</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.3640772287393,39.43689810830349,0 -120.3687531116656,39.43199472876399,0 -120.3592891981564,39.4275287907503,0 -120.3455635246751,39.43707275681844,0 -120.3530654569901,39.44030181552136,0 -120.3640772287393,39.43689810830349,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>FreelPeakUpper</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-119.9108537063011,38.86229926643713,0 -119.906045212377,38.85516928609576,0 -119.8920501234876,38.85530992798546,0 -119.8833015933419,38.86180603191239,0 -119.8875944789568,38.86587076953842,0 -119.8906043209897,38.86415683947141,0 -119.8995935483867,38.86889239164368,0 -119.9093981751147,38.86707565734067,0 -119.9108537063011,38.86229926643713,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>TahoeMountain</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.0372401314693,38.91464415655625,0 -120.0362593897364,38.90631188643448,0 -120.0291544713887,38.9049550523287,0 -120.0179869536091,38.91038320543583,0 -120.0221528786556,38.916072055217,0 -120.0321167145538,38.91689627228282,0 -120.0372401314693,38.91464415655625,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>CastlePeak</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.3465610201179,39.35036414289936,0 -120.3559971102715,39.36418404571842,0 -120.3428730916006,39.36699164777497,0 -120.3556892686587,39.38632775829711,0 -120.3641470098189,39.38469480309251,0 -120.3756223662209,39.38300578552452,0 -120.3762297048729,39.36461005808571,0 -120.3498490099222,39.34359381773587,0 -120.3465610201179,39.35036414289936,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>TinkerKnobRidgeline</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120.3208669976823,39.31670225233552,0 -120.3281062609963,39.30763727205562,0 -120.324719642402,39.30153272624207,0 -120.3286218102597,39.29189965278505,0 -120.3234282354965,39.28636164893285,0 -120.3088659428515,39.26322086790405,0 -120.2916485357869,39.24537161549224,0 -120.2778892760816,39.24559800509222,0 -120.301209218074,39.27859176505448,0 -120.302124733353,39.29783056458836,0 -120.3208669976823,39.31670225233552,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>MountHoughton</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-119.8997970508629,39.31362166362489,0 -119.9114650369658,39.31873540717827,0 -119.9167310644228,39.32876716570118,0 -119.93828998701,39.33407679249204,0 -119.9535738032981,39.32493103050261,0 -119.9513386768877,39.31348786327845,0 -119.9420109629136,39.31030198407487,0 -119.9114270801048,39.30834314697118,0 -119.8997970508629,39.31362166362489,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+	</Folder>
+</Document>
+</kml>
