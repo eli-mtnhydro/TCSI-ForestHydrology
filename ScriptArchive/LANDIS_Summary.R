@@ -30,6 +30,8 @@ ScenarioLANDISdata = data.frame(Scenarios=1:6,
                                 LAImedian=NA,
                                 LAI90pct=NA)
 
+AllLANDISvals = list()
+
 for (Scenario in 1:6){
   
   LAImapCNRM = rast(paste0("../../../TCSI_Setup/LANDIS/Processed_FutureMaps/Scenario",
@@ -54,18 +56,30 @@ for (Scenario in 1:6){
   ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==Scenario] = mean(LAIFCvals)
   ScenarioLANDISdata$LAImedian[ScenarioLANDISdata$Scenarios==Scenario] = median(LAIFCvals)
   ScenarioLANDISdata$LAI90pct[ScenarioLANDISdata$Scenarios==Scenario] = quantile(LAIFCvals,0.9)
+  
+  AllLANDISvals[[Scenario]] = LAIFCvals
 }
 
 ScenarioLANDISdata$LAImeanPctChange = (ScenarioLANDISdata$LAImean - MeanLAIFCyr0) / MeanLAIFCyr0
 
 print(signif(ScenarioLANDISdata,3))
 
+for (i in 1:6){
+  for (j in (i+1):6){
+    print(paste(i,j,t.test(AllLANDISvals[[i]],AllLANDISvals[[j]])$p.value))
+  }
+}
+t.test(AllLANDISvals[[3]],AllLANDISvals[[4]])
+
 # Final S6 vs. S2
 FinalLAIdiff = rast("LandscapeLAI_2099_S6climateAvg.tif") - rast("LandscapeLAI_2099_S2climateAvg.tif")
 
 ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==6] - ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==2]
 
-mean(unlist(FinalLAIdiff[which(Mask[,]==1)])) / mean(unlist(Year0landscapeLAI[which(Mask[,]==1)]))
+(ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==6] - ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==2]) /
+  ScenarioLANDISdata$LAImean[ScenarioLANDISdata$Scenarios==2]
+
+# mean(unlist(FinalLAIdiff[which(Mask[,]==1)])) / mean(unlist(Year0landscapeLAI[which(Mask[,]==1)]))
 
 # Maximum sub-watershed change
 

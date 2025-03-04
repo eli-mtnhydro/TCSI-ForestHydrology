@@ -94,7 +94,7 @@ DHSVMmodels = unique(ReservoirData$DHSVMmodel)
 HydrographAvgData = data.frame()
 
 for (Climate in c("CNRM-CM5 RCP 8.5","MIROC5 RCP 8.5")){
-  for (Scenario in c(2,6)){
+  for (Scenario in c(2,4,6)){
     for (Reservoir in c("New Bullards Bar Reservoir","Folsom Lake")){
 
       Ptrs = which(ReservoirData$Climate==Climate &
@@ -227,6 +227,22 @@ S2yieldMIROC.Folsom = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Res
                                                              HydrographAvgData$Climate=="MIROC5 RCP 8.5" &
                                                              HydrographAvgData$WaterYear %in% MIROCdryYrs]) * ConversionFact
 
+S4yieldCNRM.Bullards = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Reservoir=="New Bullards Bar Reservoir" &
+                                                              HydrographAvgData$Scenario==4 &
+                                                              HydrographAvgData$Climate=="CNRM-CM5 RCP 8.5" &
+                                                              HydrographAvgData$WaterYear %in% CNRMdryYrs]) * ConversionFact
+S4yieldMIROC.Bullards = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Reservoir=="New Bullards Bar Reservoir" &
+                                                               HydrographAvgData$Scenario==4 &
+                                                               HydrographAvgData$Climate=="MIROC5 RCP 8.5" &
+                                                               HydrographAvgData$WaterYear %in% MIROCdryYrs]) * ConversionFact
+S4yieldCNRM.Folsom = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Reservoir=="Folsom Lake" &
+                                                            HydrographAvgData$Scenario==4 &
+                                                            HydrographAvgData$Climate=="CNRM-CM5 RCP 8.5" &
+                                                            HydrographAvgData$WaterYear %in% CNRMdryYrs]) * ConversionFact
+S4yieldMIROC.Folsom = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Reservoir=="Folsom Lake" &
+                                                             HydrographAvgData$Scenario==4 &
+                                                             HydrographAvgData$Climate=="MIROC5 RCP 8.5" &
+                                                             HydrographAvgData$WaterYear %in% MIROCdryYrs]) * ConversionFact
 
 S6yieldCNRM.Bullards = mean(HydrographAvgData$DailyAvgQ_cms[HydrographAvgData$Reservoir=="New Bullards Bar Reservoir" &
                                                               HydrographAvgData$Scenario==6 &
@@ -259,6 +275,11 @@ S6yieldMIROC.Bullards / S2yieldMIROC.Bullards
 S6yieldCNRM.Folsom / S2yieldCNRM.Folsom
 S6yieldMIROC.Folsom / S2yieldMIROC.Folsom
 
+# Relative difference: S4 vs. S2
+S4yieldCNRM.Bullards / S2yieldCNRM.Bullards
+S4yieldMIROC.Bullards / S2yieldMIROC.Bullards
 
+S4yieldCNRM.Folsom / S2yieldCNRM.Folsom
+S4yieldMIROC.Folsom / S2yieldMIROC.Folsom
 
 

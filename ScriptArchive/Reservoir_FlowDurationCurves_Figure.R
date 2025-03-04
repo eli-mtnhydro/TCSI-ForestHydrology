@@ -7,6 +7,7 @@ setwd(dir)
 # Read in post-processed DHSVM results
 
 FlowDurationData = read.csv("FlowDurationData.csv")[,-1]
+# FlowDurationData = read.csv("LakeTahoe_FlowDurationData.csv")[,-1]
 
 # Subset to fewer scenarios
 SelectedScenarios = c(1:6)
@@ -91,15 +92,15 @@ FlowDurationDataSubset$Scenario = paste0(FlowDurationDataSubset$Scenario)
 FlowDurationDataSubset$Scenario = sub("1","Reduced Treatment",FlowDurationDataSubset$Scenario)
 FlowDurationDataSubset$Scenario = sub("2","Business-As-Usual",FlowDurationDataSubset$Scenario)
 FlowDurationDataSubset$Scenario = sub("3","Partial w/Less Fire",FlowDurationDataSubset$Scenario)
-FlowDurationDataSubset$Scenario = sub("4","Partial Restoration",FlowDurationDataSubset$Scenario)
+FlowDurationDataSubset$Scenario = sub("4","Partial Disturbance",FlowDurationDataSubset$Scenario)
 FlowDurationDataSubset$Scenario = sub("5","Full w/Less Fire",FlowDurationDataSubset$Scenario)
-FlowDurationDataSubset$Scenario = sub("6","Full Restoration",FlowDurationDataSubset$Scenario)
+FlowDurationDataSubset$Scenario = sub("6","Full Disturbance",FlowDurationDataSubset$Scenario)
 FlowDurationDataSubset$Scenario = factor(FlowDurationDataSubset$Scenario, levels=c("Reduced Treatment",
                                                                                    "Business-As-Usual",
                                                                                    "Partial w/Less Fire",
-                                                                                   "Partial Restoration",
+                                                                                   "Partial Disturbance",
                                                                                    "Full w/Less Fire",
-                                                                                   "Full Restoration"))
+                                                                                   "Full Disturbance"))
 
 pal = colorRampPalette(c("gold","gray","skyblue1","deepskyblue","dodgerblue2","blue"))
 
@@ -167,10 +168,12 @@ g1 = ggplot(data=FlowDurationDataSubset, aes(x=ExceedanceProbability,y=DailyFlow
         plot.margin=margin(0.5,0.5,0,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(color="black",size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,0.25,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(1,"cm"),
+        legend.key.spacing.y=unit(0.25,"cm"),
         legend.spacing.y=unit(0.25,"cm"),
+        legend.key=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),
         strip.background=element_rect(color="black",fill="gray90"),
@@ -205,7 +208,7 @@ g1 = ggplot(data=FlowDurationDataSubset, aes(x=ExceedanceProbability,y=DailyFlow
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(color="black",size=30, margin=margin(0.5,0,0,0,"cm")),
+        legend.title=element_text(color="black",size=30,margin=margin(0.5,0,0,0,"cm")),
         legend.text=element_text(size=20),
         legend.key.width=unit(1,"cm"),
         legend.spacing.y=unit(0.25,"cm"),
@@ -227,26 +230,31 @@ ggsave("ReservoirFDCsLarge.png", plot=g1,
 ################################################################################
 # Magnitude of change for highest floods
 
-PeakCRNMptrsS2 = which(FlowDurationData$Scenario=="Business-As-Usual" &
-                         FlowDurationData$Climate=="Wetter Future Climate" &
+PeakCRNMptrsS2 = which(FlowDurationData$Scenario==2 &
+                         FlowDurationData$Climate=="CNRM-CM5 RCP 8.5" &
                          FlowDurationData$ExceedanceProbability < 0.01)
-PeakCRNMptrsS6 = which(FlowDurationData$Scenario=="Extensive with Fire" &
-                         FlowDurationData$Climate=="Wetter Future Climate" &
-                         FlowDurationData$ExceedanceProbability < 0.01)
-
-plot(FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS6] / FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS2])
-
-PeakMIROCptrsS2 = which(FlowDurationData$Scenario=="Business-As-Usual" &
-                         FlowDurationData$Climate=="Drier Future Climate" &
-                         FlowDurationData$ExceedanceProbability < 0.01)
-PeakMIROCptrsS6 = which(FlowDurationData$Scenario=="Extensive with Fire" &
-                         FlowDurationData$Climate=="Drier Future Climate" &
+PeakCRNMptrsS6 = which(FlowDurationData$Scenario==6 &
+                         FlowDurationData$Climate=="CNRM-CM5 RCP 8.5" &
                          FlowDurationData$ExceedanceProbability < 0.01)
 
-plot(FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS6] / FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS2])
+plot(FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS6],
+     FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS6] / FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS2])
+
+PeakMIROCptrsS2 = which(FlowDurationData$Scenario==2 &
+                         FlowDurationData$Climate=="MIROC5 RCP 8.5" &
+                         FlowDurationData$ExceedanceProbability < 0.01)
+PeakMIROCptrsS6 = which(FlowDurationData$Scenario==6 &
+                         FlowDurationData$Climate=="MIROC5 RCP 8.5" &
+                         FlowDurationData$ExceedanceProbability < 0.01)
+
+plot(FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS6],
+     FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS6] / FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS2])
 
 
+mean(FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS6] / FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS2])
+mean(FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS6] / FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS2])
 
+mean(FlowDurationData$DailyFlow_mmd[PeakCRNMptrsS2] / FlowDurationData$DailyFlow_mmd[PeakMIROCptrsS2])
 
 
 

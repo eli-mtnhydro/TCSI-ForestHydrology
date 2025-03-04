@@ -17,6 +17,14 @@ PeakSWEmirocS2 = mean(rast("PeakSWE_P195S2mirocR4_YearlyAvg.tif"),
                       rast("PeakSWE_P270S2mirocR4_YearlyAvg.tif"),
                       rast("PeakSWE_P276S2mirocR4_YearlyAvg.tif"))
 
+PeakSWEcnrmS6 = mean(rast("PeakSWE_P195S6cnrmR1_YearlyAvg.tif"),
+                     rast("PeakSWE_P270S6cnrmR1_YearlyAvg.tif"),
+                     rast("PeakSWE_P276S6cnrmR1_YearlyAvg.tif"))
+
+PeakSWEmirocS6 = mean(rast("PeakSWE_P195S6mirocR4_YearlyAvg.tif"),
+                      rast("PeakSWE_P270S6mirocR4_YearlyAvg.tif"),
+                      rast("PeakSWE_P276S6mirocR4_YearlyAvg.tif"))
+
 plot(DeltaPeakSWEcnrm)
 
 MeanDeltaCNRM = mean(unlist(DeltaPeakSWEcnrm[which(Mask[,]==1)]))
@@ -27,6 +35,11 @@ MeanMIROC = mean(unlist(PeakSWEmirocS2[which(Mask[,]==1)]))
 
 MeanDeltaCNRM / MeanCNRM # 4.97%
 MeanDeltaMIROC / MeanMIROC # 5.61%
+
+t.test(unlist(PeakSWEcnrmS2[which(Mask[,]==1)]),
+       unlist(PeakSWEcnrmS6[which(Mask[,]==1)]))
+t.test(unlist(PeakSWEmirocS2[which(Mask[,]==1)]),
+       unlist(PeakSWEmirocS6[which(Mask[,]==1)]))
 
 quantile(unlist(DeltaPeakSWEcnrm[which(DeltaPeakSWEcnrm[,] > 0 | DeltaPeakSWEcnrm[,] < 0)]),
          c(0.01,0.1,0.25,0.5,0.75,0.9,0.99))
@@ -86,9 +99,48 @@ quantile(unlist(DeltaPeakSWEmiroc[PtrsMIROC[which(DeltaPeakSWEmiroc[PtrsMIROC] >
          c(0.01,0.1,0.25,0.5,0.75,0.9,0.99))
 
 # Both climates
-quantile(c(unlist(DeltaPeakSWEcnrm[PtrsCNRM[which(DeltaPeakSWEcnrm[PtrsCNRM] > 0 | DeltaPeakSWEcnrm[PtrsCNRM] < 0)]]),
-           unlist(DeltaPeakSWEmiroc[PtrsMIROC[which(DeltaPeakSWEmiroc[PtrsMIROC] > 0 | DeltaPeakSWEmiroc[PtrsMIROC] < 0)]])),
+quantile(c(unlist(DeltaPeakSWEcnrm[PtrsCNRM]),
+           unlist(DeltaPeakSWEmiroc[PtrsMIROC])),
          c(0.01,0.1,0.25,0.5,0.75,0.9,0.99))
+
+# Topographic correlations
+
+DeltaSWEvals = c(unlist(DeltaPeakSWEcnrm[PtrsCNRM]),
+                 unlist(DeltaPeakSWEmiroc[PtrsMIROC]))
+
+DEM = rast("../Overview_Maps/TCSIdomain_90mDEMfilled.tif")
+plot(DEM)
+DTMslope = terrain(DEM, "slope", neighbors=8, unit="degrees")
+DTMaspect = terrain(DEM, "aspect", neighbors=8, unit="radians")
+DTMaspectSine = sin(DTMaspect)
+DTMaspectCosine = cos(DTMaspect)
+EastDip = atan(sin(DTMaspect) * tan(DTMslope * pi/180))
+NorthDip = atan(sin((DTMaspect + pi/2)) * tan(DTMslope * pi/180))
+EastDip = EastDip * 180/pi
+NorthDip = NorthDip * 180/pi
+
+ElevVals = c(unlist(DEM[PtrsCNRM]), unlist(DEM[PtrsMIROC]))
+EastVals = c(unlist(EastDip[PtrsCNRM]), unlist(EastDip[PtrsMIROC]))
+NorthVals = c(unlist(NorthDip[PtrsCNRM]), unlist(NorthDip[PtrsMIROC]))
+LAIvals = c(unlist(LAImapCNRM[PtrsCNRM]), unlist(LAImapMIROC[PtrsMIROC]))
+LAIdeltaVals = c(unlist(DeltaLAIcnrm[PtrsCNRM]), unlist(DeltaLAImiroc[PtrsMIROC]))
+
+sum(Mask[,])
+length(ElevVals)
+
+Ptrs = sample(1:length(ElevVals),1e4)
+cor.test(ElevVals,DeltaSWEvals)
+cor.test(EastVals,DeltaSWEvals)
+cor.test(NorthVals,DeltaSWEvals)
+cor.test(LAIvals,DeltaSWEvals)
+cor.test(LAIdeltaVals,DeltaSWEvals)
+
+
+
+
+
+
+
 
 
 

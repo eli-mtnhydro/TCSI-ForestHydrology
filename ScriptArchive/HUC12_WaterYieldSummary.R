@@ -41,6 +41,9 @@ plot(QpctCNRM)
 sort(unique(unlist(QpctCNRM[which(Mask[,]==1)]))) * 100
 sort(unique(unlist(QpctMIROC[which(Mask[,]==1)]))) * 100
 
+t.test(unique(unlist(QpctCNRM[which(Mask[,]==1)])))
+t.test(unique(unlist(QpctMIROC[which(Mask[,]==1)])))
+
 ################################################################################
 # Driest years
 
@@ -124,26 +127,38 @@ QdiffData$LAIdiff = -QdiffData$LAIdiff
 # LAI initial
 plot(c(QdiffData$LAIinitial,QdiffData$LAIinitial),
      c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
-cor(c(QdiffData$LAIinitial,QdiffData$LAIinitial),
+cor.test(c(QdiffData$LAIinitial,QdiffData$LAIinitial),
     c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
 
 # LAI difference
 plot(c(QdiffData$LAIdiff,QdiffData$LAIdiff),
      c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
-cor(c(QdiffData$LAIdiff,QdiffData$LAIdiff),
+cor.test(c(QdiffData$LAIdiff,QdiffData$LAIdiff),
     c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
 
 # Precip
 plot(c(QdiffData$Precip,QdiffData$Precip),
      c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
-cor(c(QdiffData$Precip,QdiffData$Precip),
+cor.test(c(QdiffData$Precip,QdiffData$Precip),
     c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
 
 # Elevation
 plot(c(QdiffData$Elev,QdiffData$Elev),
      c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
-cor(c(QdiffData$Elev,QdiffData$Elev),
+cor.test(c(QdiffData$Elev,QdiffData$Elev),
     c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
+
+plot(c(QdiffData$QpctCNRM,QdiffData$QpctMIROC),
+         c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
+cor.test(c(QdiffData$QpctCNRM,QdiffData$QpctMIROC),
+         c(QdiffData$QmmdCNRM,QdiffData$QmmdMIROC))
+
+QdiffData[which.max(QdiffData$QpctMIROC),]
+0.08101 * 365.25
+ecdf(QdiffData$QmmdMIROC)(0.08101)
+
+t.test(QdiffData$QmmdMIROC)
+t.test(QdiffData$QmmdCNRM)
 
 # # LAI initial
 # plot(c(QdiffData$LAIinitial,QdiffData$LAIinitial),
@@ -170,9 +185,13 @@ cor(c(QdiffData$Elev,QdiffData$Elev),
 #     c(QdiffData$QpctCNRM,QdiffData$QpctMIROC))
 
 
-
-
-
-
-
+# WatershedDataSubset = WatershedData[WatershedData$Scenario==6,]
+# 
+# cor.test(WatershedDataSubset$S2RelContribStreamflow_mmd,
+#          WatershedDataSubset$S2RelContribStreamflow_pct)
+# 
+# WatershedDataSubset[which.max(WatershedDataSubset$S2RelContribStreamflow_pct),]
+# BigSubset = WatershedDataSubset[WatershedDataSubset$WatershedNum==12,]
+# mean(BigSubset$S2RelContribStreamflow_pct[BigSubset$Climate=="cnrm"])
+# mean(BigSubset$S2RelContribStreamflow_pct[BigSubset$Climate=="miroc"])
 

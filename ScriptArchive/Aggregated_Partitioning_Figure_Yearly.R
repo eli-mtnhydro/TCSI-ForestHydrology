@@ -98,7 +98,7 @@ g1 = ggplot(RelativeWaterBalancePlotData[RelativeWaterBalancePlotData$Scenario==
                                                              linewidth=0.75))) +
   labs(x="Scenario",
        y="Δ Water Balance Flux, mm / yr",
-       fill="Full Restoration (S6)\nRelative to\nBusiness-As-Usual (S2)") +
+       fill="Full Disturbance (S6)\nRelative to\nBusiness-As-Usual (S2)") +
   theme_bw() +
   theme(axis.text.x=ggtext::element_markdown(color="black",size=14,angle=-90,vjust=0.5),
         axis.text.y=ggtext::element_markdown(color="black",size=14),
@@ -108,12 +108,13 @@ g1 = ggplot(RelativeWaterBalancePlotData[RelativeWaterBalancePlotData$Scenario==
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(color="black",size=18),
+        legend.title=element_text(color="black",size=18,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=16),
         legend.key.width=unit(1,"cm"),
         legend.key.height=unit(1,"cm"),
-        legend.spacing.y=unit(1,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.title.align=0.5,
+        legend.key=element_blank(),
         strip.text=element_text(color="black",size=24),
         strip.background=element_rect(color="black",fill="gray90"),
         panel.spacing=unit(1,"cm"),

@@ -7,6 +7,16 @@ setwd(dir)
 ################################################################################
 
 WatershedData = read.csv("CombinedLocalWatershedResults_WithAttributes.csv")
+WatershedData2 = read.csv("WatershedData_WithMeanAnnualPeak.csv")
+
+WatershedData$YearlyPeakAvg_mmd = WatershedData2$YearlyPeakAvg_mmd[match(paste0(WatershedData$WatershedNum,
+                                                                                          WatershedData$Climate,
+                                                                                          WatershedData$Scenario,
+                                                                                          WatershedData$DHSVMmodel),
+                                                                                   paste0(WatershedData2$WatershedNum,
+                                                                                          WatershedData2$Climate,
+                                                                                          WatershedData2$Scenario,
+                                                                                          WatershedData2$DHSVMmodel))]
 
 WatershedData = WatershedData[WatershedData$Scenario %in% c(1,3:6),]
 
@@ -35,11 +45,18 @@ for (Scenario in c(1,3:6)){
                                WatershedData$Area_km2[WatershedData$Scenario==Scenario &
                                                         WatershedData$Climate=="miroc"])
   
+  CNRMpeakValAbsolute = mean(WatershedData$YearlyPeakAvg_mmd[WatershedData$Scenario==Scenario &
+                                                               WatershedData$Climate=="cnrm"])
+  MIROCpeakValAbsolute = mean(WatershedData$YearlyPeakAvg_mmd[WatershedData$Scenario==Scenario &
+                                                                WatershedData$Climate=="miroc"])
+  
   AvgYieldVal = (MIROCyieldVal + CNRMyieldVal) / 2
   AvgPeakVal = (CNRMpeakVal + MIROCpeakVal) / 2
+  AvgPeakValAbsolute = (CNRMpeakValAbsolute + MIROCpeakValAbsolute) / 2
   
   print(paste(Scenario,"avg. yield:",signif(AvgYieldVal*365.25,4),"mm/yr"))
-  print(paste(Scenario,"avg. peak:",signif(AvgPeakVal,4),"mm/d/yr"))
+  print(paste(Scenario,"avg. peak:",signif(AvgPeakVal * 10,4),"mm/d/decade"))
+  print(paste(Scenario,"avg. yearly peak:",signif(AvgPeakValAbsolute,4),"mm/d"))
   
   # print(paste(Scenario,"CNRM yield:",signif(CNRMyieldVal*365.25),"mm/yr"))
   # print(paste(Scenario,"MIROC yield:",signif(MIROCyieldVal*365.25),"mm/yr"))
@@ -48,7 +65,10 @@ for (Scenario in c(1,3:6)){
 }
 
 # Full restoration / partial restoration
-mean(c(41.91,33.6)) / mean(c(8.629,8.157)) # Yield
-mean(c(0.009423,0.006182)) / mean(c(0.003685,0.003582)) # Peaks
+mean(c(41.91,33.6)) / mean(c(8.629,8.157)) # Yield differences
+mean(c(0.09423,0.06182)) / mean(c(0.03685,0.03582)) # Peak trend differences
+mean(c(40.39,40.13)) / mean(c(39.21,39.21)) # Yearly peaks
+
+
 
 

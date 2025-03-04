@@ -20,19 +20,19 @@ PeakFlowPlotData = data.frame(Values=c(PeakFlowDataSubset$IntTotal_DeltaStorm_Re
                                        PeakFlowDataSubset$IntEvapTotal_DuringStorm_RelS2_mm,
                                        PeakFlowDataSubset$SnowMelt_TotDuringStorm_RelS2_mm),
                               ValueType=c(rep("Storm Total\nInterception Storage",nrow(PeakFlowDataSubset)),
-                                          rep("Cumulative Storm\nInterception Loss",nrow(PeakFlowDataSubset)),
-                                          rep("Cumulative Storm\nSnowpack Outflow",nrow(PeakFlowDataSubset))),
-                              Climate=rep(PeakFlowDataSubset$Climate,length(SelectedProcesses)),
-                              Scenario=rep(PeakFlowDataSubset$Scenario,length(SelectedProcesses)),
-                              Watershed=rep(PeakFlowDataSubset$Basin,length(SelectedProcesses)))
+                                          rep("Storm-Total Interception Loss",nrow(PeakFlowDataSubset)),
+                                          rep("Storm-Total Snowpack Outflow",nrow(PeakFlowDataSubset))),
+                              Climate=rep(PeakFlowDataSubset$Climate,3),
+                              Scenario=rep(PeakFlowDataSubset$Scenario,3),
+                              Watershed=rep(PeakFlowDataSubset$Basin,3))
 
 PeakFlowPlotData = PeakFlowPlotData[PeakFlowPlotData$Scenario %in% SelectedScenarios,]
 
 # Plot order for ValueType
 PeakFlowPlotData$ValueType = factor(PeakFlowPlotData$ValueType,
                                     levels=c("Storm Total\nInterception Storage",
-                                             "Cumulative Storm\nInterception Loss",
-                                             "Cumulative Storm\nSnowpack Outflow"))
+                                             "Storm-Total Interception Loss",
+                                             "Storm-Total Snowpack Outflow"))
 
 # Change climate name
 PeakFlowPlotData$ClimateName = PeakFlowPlotData$Climate
@@ -44,18 +44,18 @@ PeakFlowPlotData$Scenario = paste0(PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("1","Reduced Treatment",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("2","Business-As-Usual",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("3","Partial w/Less Fire",PeakFlowPlotData$Scenario)
-PeakFlowPlotData$Scenario = sub("4","Partial Restoration",PeakFlowPlotData$Scenario)
+PeakFlowPlotData$Scenario = sub("4","Partial Disturbance",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("5","Full w/Less Fire",PeakFlowPlotData$Scenario)
-PeakFlowPlotData$Scenario = sub("6","Full Restoration",PeakFlowPlotData$Scenario)
+PeakFlowPlotData$Scenario = sub("6","Full Disturbance",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = factor(PeakFlowPlotData$Scenario, levels=c("Reduced Treatment",
                                                                        "Business-As-Usual",
                                                                        "Partial w/Less Fire",
-                                                                       "Partial Restoration",
+                                                                       "Partial Disturbance",
                                                                        "Full w/Less Fire",
-                                                                       "Full Restoration"))
+                                                                       "Full Disturbance"))
 
 # Trim to a reasonable range
-MaxRange = 3
+MaxRange = 20
 PeakFlowPlotData$Values = pmin(PeakFlowPlotData$Values,MaxRange)
 PeakFlowPlotData$Values = pmax(PeakFlowPlotData$Values,-MaxRange)
 
@@ -99,15 +99,16 @@ PeakFlowPlotData$Values = pmax(PeakFlowPlotData$Values,-MaxRange)
 #        width=unit(12,"in"), height=unit(9,"in"), dpi=300)
 
 # Absolute units
-g1 = ggplot(data=PeakFlowPlotData, aes(x=Scenario, y=Values)) + 
+g1 = ggplot(data=PeakFlowPlotData[PeakFlowPlotData$ValueType!="Storm Total\nInterception Storage",],
+            aes(x=Scenario, y=Values)) + 
   geom_hline(yintercept=0, linewidth=1) +
   geom_violin(aes(fill=Scenario),
               scale="width", width=0.9, linewidth=0.5, color="black") +
   scale_fill_manual(values=c("gold","skyblue1","deepskyblue","dodgerblue2","blue")) +
-  scale_y_continuous(breaks=seq(-5,5,1),
-                     labels=c(seq(-5,-1,1),
+  scale_y_continuous(breaks=seq(-100,100,5),
+                     labels=c(seq(-100,-5,5),
                               "<strong>BAU<br>Scenario</strong>",
-                              seq(1,5,1))) +
+                              paste0("+",seq(5,100,5)))) +
   labs(x="",
        y="Δ Water Balance Flux, mm",
        fill="Management\nScenario") +
@@ -121,11 +122,11 @@ g1 = ggplot(data=PeakFlowPlotData, aes(x=Scenario, y=Values)) +
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(1,"cm"),
         legend.key.height=unit(1,"cm"),
-        legend.spacing.y=unit(1,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         plot.title=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),
@@ -148,14 +149,14 @@ PeakFlowDataSubset$SnowEnergyTotal_RelS2_wm2 = PeakFlowDataSubset$SnowSW_AvgDuri
   PeakFlowDataSubset$SnowLatent_AvgDuringStorm_RelS2_wm2 +
   PeakFlowDataSubset$SnowAdvected_AvgDuringStorm_RelS2_wm2
 
+SelectedScenarios = c(1,3:6)
+
 SelectedProcesses = c("SnowSW_AvgDuringStorm_RelS2_wm2",
                       "SnowLW_AvgDuringStorm_RelS2_wm2",
                       "SnowSensible_AvgDuringStorm_RelS2_wm2",
                       "SnowLatent_AvgDuringStorm_RelS2_wm2",
                       "SnowAdvected_AvgDuringStorm_RelS2_wm2",
                       "SnowEnergyTotal_RelS2_wm2")
-
-SelectedScenarios = c(1,3:6)
 
 # Reorganize to ggplot style
 PeakFlowPlotData = data.frame(Values=unname(unlist(PeakFlowDataSubset[,SelectedProcesses])),
@@ -185,15 +186,15 @@ PeakFlowPlotData$Scenario = paste0(PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("1","Reduced Treatment",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("2","Business-As-Usual",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("3","Partial w/Less Fire",PeakFlowPlotData$Scenario)
-PeakFlowPlotData$Scenario = sub("4","Partial Restoration",PeakFlowPlotData$Scenario)
+PeakFlowPlotData$Scenario = sub("4","Partial Disturbance",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = sub("5","Full w/Less Fire",PeakFlowPlotData$Scenario)
-PeakFlowPlotData$Scenario = sub("6","Full Restoration",PeakFlowPlotData$Scenario)
+PeakFlowPlotData$Scenario = sub("6","Full Disturbance",PeakFlowPlotData$Scenario)
 PeakFlowPlotData$Scenario = factor(PeakFlowPlotData$Scenario, levels=c("Reduced Treatment",
                                                                        "Business-As-Usual",
                                                                        "Partial w/Less Fire",
-                                                                       "Partial Restoration",
+                                                                       "Partial Disturbance",
                                                                        "Full w/Less Fire",
-                                                                       "Full Restoration"))
+                                                                       "Full Disturbance"))
 
 # Trim to a reasonable range
 MaxRange = 2
@@ -208,9 +209,9 @@ g1 = ggplot(data=PeakFlowPlotData, aes(x=Scenario, y=Values)) +
   scale_y_continuous(breaks=seq(-2,2,1),
                      labels=c(seq(-2,-1,1),
                               "<strong>BAU<br>Scenario</strong>",
-                              seq(1,2,1))) +
+                              paste0("+",seq(1,2,1)))) +
   labs(x="",
-       y=expression(Delta*" Snow Energy Balance Flux, W/m"^2),
+       y=expression(Delta*" Snow Energy Balance Flux, W / m"^2),
        fill="Management\nScenario") +
   theme_bw() +
   theme(axis.text.x=element_blank(),
@@ -222,11 +223,11 @@ g1 = ggplot(data=PeakFlowPlotData, aes(x=Scenario, y=Values)) +
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(1,"cm"),
         legend.key.height=unit(1,"cm"),
-        legend.spacing.y=unit(1,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         plot.title=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),

@@ -36,15 +36,15 @@ WatershedDataSubset$Scenario = paste0(WatershedDataSubset$Scenario)
 WatershedDataSubset$Scenario = sub("1","Reduced Treatment",WatershedDataSubset$Scenario)
 WatershedDataSubset$Scenario = sub("2","Business-As-Usual",WatershedDataSubset$Scenario)
 WatershedDataSubset$Scenario = sub("3","Partial w/Less Fire",WatershedDataSubset$Scenario)
-WatershedDataSubset$Scenario = sub("4","Partial Restoration",WatershedDataSubset$Scenario)
+WatershedDataSubset$Scenario = sub("4","Partial Disturbance",WatershedDataSubset$Scenario)
 WatershedDataSubset$Scenario = sub("5","Full w/Less Fire",WatershedDataSubset$Scenario)
-WatershedDataSubset$Scenario = sub("6","Full Restoration",WatershedDataSubset$Scenario)
+WatershedDataSubset$Scenario = sub("6","Full Disturbance",WatershedDataSubset$Scenario)
 WatershedDataSubset$Scenario = factor(WatershedDataSubset$Scenario, levels=c("Reduced Treatment",
                                                                              "Business-As-Usual",
                                                                              "Partial w/Less Fire",
-                                                                             "Partial Restoration",
+                                                                             "Partial Disturbance",
                                                                              "Full w/Less Fire",
-                                                                             "Full Restoration"))
+                                                                             "Full Disturbance"))
 
 # Change peak flow trend to 85-year peak flow delta
 WatershedDataSubset$S2RelYearlyPeakSensSlope_mmd85yr = 85 * WatershedDataSubset$S2RelYearlyPeakSensSlope_mmdyr
@@ -80,10 +80,12 @@ g1 = ggplot(data=WatershedDataSubset, aes(x=S2RelContribStreamflow_pct,
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(2,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.spacing.y=unit(1,"cm"),
+        legend.key=element_blank(),
         plot.title=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),
@@ -100,7 +102,7 @@ ggsave("WaterYieldVsPeakFlows_Relative.png", plot=g1,
 
 # Absolute physical units
 g1 = ggplot(data=WatershedDataSubset, aes(x=S2RelContribStreamflow_mmyr,
-                                          y=S2RelYearlyPeakSensSlope_mmdyr)) +
+                                          y=S2RelYearlyPeakSensSlope_mmdyr * 10)) +
   geom_hline(yintercept=0,linewidth=1) +
   geom_vline(xintercept=0,linewidth=1) +
   geom_polygon(aes(group=WatershedScenario, color=Scenario), fill=NA, linewidth=0.25, show.legend=FALSE) +
@@ -110,9 +112,9 @@ g1 = ggplot(data=WatershedDataSubset, aes(x=S2RelContribStreamflow_mmyr,
   scale_shape_manual(values=c(0, 1, 2)) +
   scale_x_continuous(breaks=seq(-150,150,50),
                      labels=c(seq(-150,-50,50),"<strong>BAU<br>Scenario</strong>",paste0("+",seq(50,150,50)))) +
-  scale_y_continuous(breaks=seq(-0.1,0.1,0.01),
-                     labels=c(seq(-0.1,-0.01,0.01),"<strong>BAU<br>Scenario</strong>",paste0("+",seq(0.01,0.1,0.01)))) +
-  labs(x="Δ Streamflow Generation, mm / yr", y="Δ Yearly Peak Flow Trend, mm / d / yr",
+  scale_y_continuous(breaks=seq(-1,1,0.1),
+                     labels=c(seq(-1,-0.1,0.1),"<strong>BAU<br>Scenario</strong>",paste0("+",seq(0.1,1,0.1)))) +
+  labs(x="Δ Streamflow Generation, mm / yr", y="Δ Yearly Peak Flow Trend, mm / d / decade",
        color="Management Scenario",shape="Calibrated Model",
        title="") +
   theme_bw() +
@@ -124,10 +126,12 @@ g1 = ggplot(data=WatershedDataSubset, aes(x=S2RelContribStreamflow_mmyr,
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(2,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.spacing.y=unit(1,"cm"),
+        legend.key=element_blank(),
         plot.title=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),
@@ -209,10 +213,12 @@ g1 = ggplot(data=WatershedDataSubset, aes(x=YearlyPeakAvg_cms,
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(size=24),
+        legend.title=element_text(size=24,margin=margin(0,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(2,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.spacing.y=unit(1,"cm"),
+        legend.key=element_blank(),
         plot.title=element_blank(),
         legend.title.align=0.5,
         strip.text=element_text(color="black",size=24),

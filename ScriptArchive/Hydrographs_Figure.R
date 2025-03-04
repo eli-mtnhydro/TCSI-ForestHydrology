@@ -45,7 +45,7 @@ g1 = ggplot() +
   annotate("text", x=CalValDate + 30, y=50,
            label="Calibration →",
            hjust=0,vjust=0,size=24/.pt,color="black") +
-  scale_color_manual(values=c("gold","aquamarine3","dodgerblue2")) +
+  scale_color_manual(values=c("red","violet","dodgerblue")) +
   scale_linewidth_manual(values=c(2,1.5,1),guide="none") +
   scale_linetype_manual(name="\nMeasured",values=c(3),
                         guide=guide_legend(override.aes=list(color="black",
@@ -78,10 +78,11 @@ g1 = ggplot() +
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(color="black",size=24),
+        legend.key=element_blank(),
+        legend.title=element_text(color="black",size=24,margin=margin(1,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(1.5,"cm"),
-        legend.spacing.y=unit(1,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.title.align=0.5,
         panel.spacing.y=unit(1,"cm")) +
   guides(color=guide_legend(override.aes=list(linewidth=4),byrow=TRUE))
@@ -101,7 +102,7 @@ g2 = ggplot() +
   geom_line(data=HydrographData[HydrographData$MeasOrMod=="Measured",],
             aes(x=Date,y=Streamflow_mmd,linetype="USGS 11413000"),
             linewidth=2, lineend="round", color="black") +
-  scale_color_manual(values=c("gold","aquamarine3","dodgerblue2")) +
+  scale_color_manual(values=c("red","violet","dodgerblue")) +
   scale_linewidth_manual(values=c(4,3,2),guide="none") +
   scale_linetype_manual(name="\nMeasured",values=c(3),
                         guide=guide_legend(override.aes=list(color="black",
@@ -133,10 +134,11 @@ g2 = ggplot() +
         plot.margin=margin(0.5,0.5,0.5,0.5,"cm"),
         panel.background=element_rect("white", "black"),
         panel.grid=element_blank(),
-        legend.title=element_text(color="black",size=24),
+        legend.key=element_blank(),
+        legend.title=element_text(color="black",size=24,margin=margin(1,0,1,0,"cm")),
         legend.text=element_text(size=18),
         legend.key.width=unit(1.5,"cm"),
-        legend.spacing.y=unit(1,"cm"),
+        legend.key.spacing.y=unit(1,"cm"),
         legend.title.align=0.5,
         panel.spacing.y=unit(1,"cm")) +
   guides(color=guide_legend(override.aes=list(linewidth=4),byrow=TRUE))
